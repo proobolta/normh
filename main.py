@@ -22,7 +22,7 @@ from fastapi import FastAPI, File, UploadFile, BackgroundTasks, HTTPException, D
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel, EmailStr, Field, validator
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from passlib.context import CryptContext
 import jwt
 from starlette.requests import Request
@@ -165,7 +165,7 @@ class UserCreate(BaseModel):
     password: str
     name: Optional[str] = None
     
-    @validator('password')
+    @field_validator('password')
     def password_strength(cls, v):
         if len(v) < 8:
             raise ValueError("Password must be at least 8 characters")
