@@ -733,6 +733,9 @@ def convert_text_to_premium(text: str, style: str = "standard") -> str:
 @app.get("/", include_in_schema=False)
 async def root():
     return {"message": "Email Validator API", "version": VERSION}
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
 
 # Authentication routes
 @app.post("/auth/token", response_model=UserResponse)
