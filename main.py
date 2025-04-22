@@ -938,7 +938,7 @@ async def get_user_stats(current_user: UserInDB = Depends(get_current_active_use
             "hour": hour_start.strftime("%H:00"),
             "count": count
         })
-    
+
     # Get remaining quota
     plan_limits = PLAN_LIMITS.get(current_user.plan, PLAN_LIMITS[PlanType.FREE])
     current_hour_usage = hourly_usage[0]["count"] if hourly_usage else 0
